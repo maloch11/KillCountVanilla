@@ -1,0 +1,6 @@
+## Interface: 11200
+## Title: Kill Count Vanilla
+## Notes: Shows how many mobs you've killed in a tooltip.
+## SavedVariablesPerCharacter: kill_count
+## Author: https://github.com/MikeBeloborodov
+KillCountVanilla.lua
