@@ -73,12 +73,15 @@ end
 
 SLASH_KCOUNT1 = "/kcount"
 SlashCmdList["KCOUNT"] = function (msg)
-	if msg == "reset" then
+	s, e, mobName = string.find(msg, "^view (.+)")
+	if mobName then
+		PrintWhite("Kills: " .. (kill_count[mobName] or "0"))
+	elseif msg == "reset" then
 		local name = UnitName('target')
 		kill_count[name] = 0
 	else
 		PrintWhite("Kill Count Vanilla:")
-		PrintWhite("Target a mob you want to reset")
-		PrintWhite("/kcount reset   -   reset kill count")
+		PrintWhite("/kcount reset   -   reset kill count for current target")
+		PrintWhite("/kcount view <mob name>   -   view the kill count for the specified mob")
 	end
 end
