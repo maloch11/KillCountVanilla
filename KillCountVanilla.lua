@@ -22,31 +22,31 @@ killCount:SetScript("OnEvent",
 
 		if event == "CHAT_MSG_COMBAT_HOSTILE_DEATH" then
 			local slainMob = nil
-			local s, e, mobName = string.find(arg1, "You have slain (.+)!")
-			if mobName then
-				slainMob = mobName
+			if IsInInstance() or GetNumRaidMembers() > 0 then
+				local s, e, mobName = string.find(arg1, "(.+) dies.")
+				if mobName then
+					slainMob = mobName
+				end
 			else
-				s, e, mobName, killerName = string.find(arg1, "^(.+) is slain by (.+)!")
-				if mobName and killerName then
-					local isGroupMember = false
-					if GetNumPartyMembers() > 0 then
-						for i = 1, GetNumPartyMembers() do
-							if UnitName("party"..i) == killerName then
-								isGroupMember = true
-								break
+				local s, e, mobName = string.find(arg1, "You have slain (.+)!")
+				if mobName then
+					slainMob = mobName
+				else
+					s, e, mobName, killerName = string.find(arg1, "^(.+) is slain by (.+)!")
+					if mobName and killerName then
+						local isGroupMember = false
+						if GetNumPartyMembers() > 0 then
+							for i = 1, GetNumPartyMembers() do
+								if UnitName("party"..i) == killerName then
+									isGroupMember = true
+									break
+								end
 							end
 						end
-					elseif GetNumRaidMembers() > 0 then
-						for i = 1, GetNumRaidMembers() do
-							if UnitName("raid"..i) == killerName then
-								isGroupMember = true
-								break
-							end
-						end
-					end
 
-					if isGroupMember then
-						slainMob = mobName
+						if isGroupMember then
+							slainMob = mobName
+						end
 					end
 				end
 			end
