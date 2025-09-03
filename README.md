@@ -15,4 +15,4 @@ The combat log messages needed to verify a kill came from the player's party/rai
 
 ## Slash Commands
 * **/kcount reset** Target a mob and reset it's kill count with this command
-* **/kcount view <mob name>** View the kill count for the specified mob with this command
+* **/kcount view &lt;mob name&gt;** View the kill count for the specified mob with this command
